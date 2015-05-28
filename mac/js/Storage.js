@@ -11,10 +11,10 @@ var LS_PREFIX = '_unlocker_';
  * @type {Storage}
  */
 var storage = (function() {
-    var id = new Date(), st, res;
+    var id = Date.now(), st, res;
     try {
         (st = window.localStorage).setItem(id, id);
-        res = st.getItem(id) === id;
+        res = Number(st.getItem(id)) === id;
         st.removeItem(id);
         return res && st;
     } catch (exception) {}
