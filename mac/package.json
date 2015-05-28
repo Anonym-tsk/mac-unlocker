@@ -1,0 +1,16 @@
+{
+  "name": "rfid-unlock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "author": "Anonym.tsk@gmail.com",
+  "license": "MIT",
+  "window": {
+    "toolbar": false,
+    "show_in_taskbar": false,
+    "show": false
+  },
+  "devDependencies": {
+    "serialport": "^1.7.1"
+  }
+}

@@ -1,0 +1,6 @@
+pids
+*.pid
+*.seed
+.grunt
+.idea
+node_modules

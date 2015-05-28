@@ -1,0 +1,165 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #ECECEC;
+    color: #14100F;
+    overflow: hidden;
+}
+
+body, input, button, select, option, textarea {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 13px;
+    line-height: 1.4em;
+    outline: none;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.content {
+    padding: 12px 16px;
+    max-width: 362px;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+hr {
+    width: 100%;
+    height: 1px;
+    background: #D7D7D7;
+    display: block;
+    border: none;
+    margin: 10px 0;
+    box-shadow: 0 1px 0 0 #F4F4F4;
+}
+
+h3, h4 {
+    margin: 0 0 0.8em 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+button {
+    border: 1px solid #6D6F6F;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #858784 0%, #939393 50%, #6C6C6C 100%);
+    padding: 0 10px;
+    text-align: center;
+    color: #fff;
+    line-height: 23px;
+    text-shadow: 0 1px 0 #252525;
+    cursor: pointer;
+    width: 90px;
+}
+button:active {
+    background: linear-gradient(to bottom, #6C6C6C 0%, #939393 50%, #858784 100%);
+    line-height: 22px;
+    padding-top: 1px;
+}
+button[disabled] {
+    background: linear-gradient(to bottom, #C5C5C5 0%, #CDCDCD 50%, #AEAEAE 100%);
+    text-shadow: 0 1px 0 #6C6C6C;
+    border-color: #7C7C7C;
+    cursor: default;
+}
+select {
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.success {
+    color: #009800;
+}
+.error {
+    color: #B80000;
+}
+.info {
+    color: #9A9A9A;
+    text-align: center;
+}
+.area {
+    border: 1px solid #BCBCBC;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #FAFAFA 0%, #FFFFFF 50%, #F4F4F4 100%);
+    padding: 5px 10px;
+    width: 240px;
+}
+
+.port-message {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.port-select {
+    width: 262px;
+    display: none;
+}
+.port-empty {
+    width: 240px;
+}
+
+.add-key {
+    float: left;
+}
+.add-button {
+    margin: 2px 0 0 10px;
+}
+.add-id {
+    display: none;
+}
+
+.key-list {
+    display: none;
+}
+.key {
+    overflow: hidden;
+    margin: 5px 0 0 0;
+}
+.key-id {
+    float: left;
+}
+.key-remove {
+    margin: 2px 0 0 10px;
+}
+
+.action-close {
+    width: 240px;
+    float: right;
+    line-height: 26px;
+    margin: 6px 0 0 0;
+}
+.action-close:active {
+    line-height: 24px;
+    padding-top: 2px;
+}
+
+.keychain-pass {
+    float: left;
+    overflow: hidden;
+}
+.keychain-yes, .keychain-no {
+    cursor: pointer;
+}
+.keychain-yes {
+    display: none;
+}
+.keychain-input {
+    cursor: text;
+    display: none;
+}
+.keychain-button {
+    margin: 2px 0 0 10px;
+}
+.keychain-message {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mac unlocker settings</title>
+    <script src="js/settings.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/settings.css"/>
+</head>
+<body>
+<div class="content">
+    <section class="ports">
+        <h3>Порт устройства</h3>
+        <div class="port">
+            <select class="port-select area"></select>
+            <div class="port-empty info area">Нет доступных портов</div>
+        </div>
+        <span class="port-message success">Порт доступен</span>
+        <span class="port-message error">Порт недоступен</span>
+    </section>
+    <hr/>
+    <section class="keychain">
+        <h3>Пароль разблокировки</h3>
+        <div class="keychain-pass">
+            <div class="keychain-no info area">Установить пароль</div>
+            <div class="keychain-yes info area">Изменить пароль</div>
+            <input type="password" class="keychain-input area">
+        </div>
+        <button class="keychain-button" disabled>Сохранить</button>
+        <span class="keychain-message success">Сохранено</span>
+        <span class="keychain-message error">Ошибка</span>
+    </section>
+    <hr/>
+    <section class="keys">
+        <h3>Ключи</h3>
+        <div class="key-list"></div>
+        <div class="key-empty info area">Нет активных ключей</div>
+    </section>
+    <hr/>
+    <section class="add">
+        <h3>Добавить ключ</h3>
+        <div class="add-key area">
+            <div class="add-message info">Приложите ключ</div>
+            <div class="add-id"></div>
+        </div>
+        <button class="add-button" disabled>Добавить</button>
+    </section>
+    <hr/>
+    <section class="actions">
+        <button class="action-close">Сохранить и закрыть</button>
+    </section>
+</div>
+</body>
+</html>
