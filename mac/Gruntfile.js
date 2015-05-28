@@ -15,54 +15,17 @@ module.exports = function(grunt) {
 
         // Project config
         config: {
-            path: {
-                app: 'app',
-                dist: 'dist',
-                package: 'package'
-            },
             package: grunt.file.readJSON('package.json')
         },
 
-        // Watches files for changes and runs tasks based on the changed files
-        watch: {
-            js: {
-                files: ['scripts/{,*/}*.js'],
-                tasks: ['jshint'],
+        // Run app
+        run: {
+            nw: {
+                cmd: '/usr/local/lib/node_modules/nw/nwjs/nwjs.app/Contents/MacOS/nwjs',
+                args: ['.'],
                 options: {
-                    livereload: true
-                }
-            },
-            gruntfile: {
-                files: ['Gruntfile.js']
-            },
-            styles: {
-                files: ['css/{,*/}*.css'],
-                tasks: [],
-                options: {
-                    livereload: true
-                }
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '*.html',
-                    'img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-                ]
-            }
-        },
-
-        // Grunt server and debug server setting
-        connect: {
-            options: {
-                port: 9000,
-                livereload: 35729,
-                hostname: 'localhost'
-            },
-            debug: {
-                options: {
-                    open: false
+                    wait: true,
+                    itterable: true
                 }
             }
         },
@@ -109,129 +72,30 @@ module.exports = function(grunt) {
                 },
                 reporter: require('jshint-stylish')
             },
-            all: [
-                'Gruntfile.js',
-                'js/{,*/}*.js'
-            ]
-        },
-
-        // Minify html
-        htmlmin: {
-            dist: {
-                options: {
-                    removeCommentsFromCDATA: true,
-                    collapseWhitespace: true,
-                    collapseBooleanAttributes: true,
-                    removeEmptyAttributes: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%= config.path.app %>',
-                    src: '*.html',
-                    dest: '<%= config.path.dist %>'
-                }]
-            }
-        },
-
-        // Minify scripts
-        uglify: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= config.path.app %>/scripts',
-                    src: [
-                        '{,*/}*.js',
-                        '!lib/*.js',
-                        '!chromereload.js'
-                    ],
-                    dest: '<%= config.path.dist %>/scripts'
-                }]
-            }
-        },
-
-        // Copies remaining files to places other tasks can use
-        copy: {
-            assets: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= config.path.app %>',
-                    dest: '<%= config.path.dist %>',
-                    src: [
-                        '_locales/{,*/}*.json',
-                        'stations.json',
-                        'scripts/lib/{,*/}*.js'
-                    ]
-                }]
-            },
-            html: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= config.path.app %>',
-                    dest: '<%= config.path.dist %>',
-                    src: '*.html'
-                }]
-            },
-            js: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= config.path.app %>/scripts',
-                    dest: '<%= config.path.dist %>/scripts',
-                    src: [
-                        '{,*/}*.js',
-                        '!lib/*.js',
-                        '!chromereload.js'
-                    ]
-                }]
-            }
-        },
-
-        // Compres dist files to package
-        compress: {
-            chrome: {
-                options: {
-                    archive: 'package/chrome-<%= config.package.name %>-<%= config.package.version %>.zip'
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'dist/',
-                    src: ['**'],
-                    dest: ''
-                }]
-            },
-            opera: {
-                options: {
-                    archive: 'package/opera-<%= config.package.name %>-<%= config.package.version %>.zip'
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'dist/',
-                    src: ['**'],
-                    dest: ''
-                }]
-            }
+            js: ['js/{,*/}*.js'],
+            gruntfile: ['Gruntfile.js']
         }
     });
 
-    grunt.registerTask('run', [
-        'jshint',
-        'connect',
-        'watch'
-    ]);
+    grunt.registerTask('nwbuild', function() {
+        var exec = require('child_process').exec,
+            done = this.async(),
+            name = grunt.config.get('config.package.name'),
+            version = process.versions.node,
+            arch = (process.arch === 'x64' ? 'osx64' : 'osx32');
+
+        exec('nwbuild -v ' + version + ' -p ' + arch + ' .', function(err) {
+            if (!err) {
+                grunt.file.copy('./img/lock.icns', './build/' + name + '/' + arch + '/' + name + '.app/Contents/Resources/nw.icns');
+            }
+            done(!err);
+        });
+    });
 
     grunt.registerTask('build', [
         'jshint',
         'clean',
-        'manifestCopy',
-        'sass:compressed',
-        'imagemin',
-        'htmlmin',
-        'uglify',
-        'copy:assets',
-        'check',
-        'compress:chrome'
+        'nwbuild'
     ]);
 
     grunt.registerTask('default', [

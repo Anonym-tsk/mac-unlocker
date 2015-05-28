@@ -1,23 +1,26 @@
 {
   "name": "rfid-unlock",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Arduino RFID Mac unlocker",
   "main": "index.html",
   "author": "Anonym.tsk@gmail.com",
-  "license": "MIT",
+  "license": "GPLv3",
   "window": {
     "icon": "img/lock.icns",
     "toolbar": false,
-    "show_in_taskbar": true,
-    "show": true
+    "show_in_taskbar": false,
+    "show": false
+  },
+  "dependencies": {
+    "serialport": "^1.7.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.2",
+    "grunt-run": "^0.3.0",
     "jshint-stylish": "^2.0.0",
     "load-grunt-tasks": "^3.2.0",
-    "serialport": "^1.7.1",
     "time-grunt": "^1.2.1"
   }
 }
