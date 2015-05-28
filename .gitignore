@@ -4,3 +4,4 @@ pids
 .grunt
 .idea
 node_modules
+build
