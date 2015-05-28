@@ -1,6 +1,5 @@
 'use strict';
 
-var console = global.window.console;
 var gui = global.window.nwDispatcher.requireNwGui();
 
 var _tray;

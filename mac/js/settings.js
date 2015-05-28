@@ -1,6 +1,5 @@
 'use strict';
 
-var console = global.window.console;
 var serialport = require('serialport');
 var Storage = require('./js/Storage');
 var Unlocker = require('./js/Unlocker');

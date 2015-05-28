@@ -29,6 +29,17 @@ function _invalidKeyHandler() {
     _serial.write('M0F');
 }
 
+function _serialDataHandler(data) {
+    var keyCode = data.match(/S([0-9]+)E/i);
+    if (keyCode && keyCode[1]) {
+        _serial.flush(function() {
+            var isValid = _isValidKey(keyCode[1]);
+            isValid ? _validKeyHandler() : _invalidKeyHandler();
+            _onKeyHandler && _onKeyHandler(keyCode[1], isValid);
+        });
+    }
+}
+
 function _serialOpenHandler() {
     console.log('Connection opened');
 
@@ -40,17 +51,6 @@ function _serialCloseHandler() {
     console.log('Connection closed');
 
     _onDisconnectHandler && _onDisconnectHandler();
-}
-
-function _serialDataHandler(data) {
-    var keyCode = data.match(/S([0-9]+)E/i);
-    if (keyCode && keyCode[1]) {
-        _serial.flush(function() {
-            var isValid = _isValidKey(keyCode[1]);
-            isValid ? _validKeyHandler() : _invalidKeyHandler();
-            _onKeyHandler && _onKeyHandler(keyCode[1], isValid);
-        });
-    }
 }
 
 module.exports = {

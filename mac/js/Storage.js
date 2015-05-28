@@ -11,10 +11,10 @@ var LS_PREFIX = '_unlocker_';
  * @type {Storage}
  */
 var storage = (function() {
-    var id = new Date, st, res;
+    var id = new Date(), st, res;
     try {
         (st = window.localStorage).setItem(id, id);
-        res = st.getItem(id) == id;
+        res = st.getItem(id) === id;
         st.removeItem(id);
         return res && st;
     } catch (exception) {}
@@ -48,24 +48,6 @@ function _setItem(name, value) {
     }
 }
 
-/**
- * Remove item from storage.
- * @param {string} name
- * @private
- */
-function _removeItem(name) {
-    storage && storage.removeItem(LS_PREFIX + name);
-}
-
-/**
- * Get storage size.
- * @return {number}
- * @private
- */
-function _getLength() {
-    return storage && storage.length;
-}
-
 module.exports = {
     getPort: function() {
         return _getItem('port');
@@ -91,6 +73,6 @@ module.exports = {
     },
     hasKey: function(id) {
         var keys = _getItem('keys') || [];
-        return !!~keys.indexOf(id);
+        return keys.indexOf(id) >= 0;
     }
 };

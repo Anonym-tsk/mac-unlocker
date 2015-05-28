@@ -18,7 +18,7 @@ function _exec(command, errorCallback, successCallback) {
 
 module.exports = {
     isLocked: function(callback) {
-        exec('ps aux | grep ScreenSaverEngine.app | grep -vc grep', function (error, stdout, stderr) {
+        exec('ps aux | grep ScreenSaverEngine.app | grep -vc grep', function (error, stdout) {
             callback(parseInt(stdout, 10) > 0);
         });
     },
@@ -42,14 +42,14 @@ module.exports = {
     savePassword: function(password, callback, noDelete) {
         _exec(
             'security -q add-generic-password -a "' + KEYCHAIN + '" -s "Unlocker password" -w "' + password + '" -T "/usr/bin/security"',
-            function(error, message) {
+            function() {
                 if (noDelete) {
                     callback(false);
                 } else {
                     this.deletePassword(this.savePassword.bind(this, password, callback, true));
                 }
             }.bind(this),
-            function(result) {
+            function() {
                 callback && callback(true);
             }
         );

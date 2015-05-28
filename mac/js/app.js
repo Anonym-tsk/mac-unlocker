@@ -1,6 +1,5 @@
 'use strict';
 
-var serialport = require('serialport');
 var Tray = require('./js/Tray');
 var Unlocker = require('./js/Unlocker');
 var Mac = require('./js/Mac');
