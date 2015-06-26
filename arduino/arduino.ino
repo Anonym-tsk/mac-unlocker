@@ -2,7 +2,7 @@
  --------------------------------------------------------------
  * Pin layout should be as follows:
  * Signal     Pin              Pin               Pin
- *            Arduino Uno      Arduino Mega      MFRC522 board
+ *            Arduino Nano     Arduino Mega      MFRC522 board
  * ------------------------------------------------------------
  * Reset      9                5                 RST
  * SPI SS     10               53                SDA
@@ -16,8 +16,8 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-#define SS_PIN 53
-#define RST_PIN 5
+#define SS_PIN 10
+#define RST_PIN 9
 #define LED_PIN 13
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);        // Create MFRC522 instance.
